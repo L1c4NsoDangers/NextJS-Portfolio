@@ -4,26 +4,33 @@ import ClientExperienceAndEducationView from "@/components/client-view/experienc
 import ClientHomeView from "@/components/client-view/home";
 import ClientProjectView from "@/components/client-view/project";
 
-async function extractAllDatas(currentSection) {
-  const res = await fetch(
-    `https://nacilprofile.vercel.app/api/${currentSection}/get`,
-    {
-      method: "GET",
-      cache: "no-store",
-    }
-  );
+async function extractAllDatas(sections) {
+  try {
+    const requests = sections.map((section) =>
+      fetch(`https://nacilprofile.vercel.app/api/${section}/get`, {
+        method: "GET",
+        cache: "no-store",
+      }).then((res) => res.json())
+    );
 
-  const data = await res.json();
+    const data = await Promise.all(requests);
 
-  return data && data.data;
+    return data.map((item) => item.data);
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    return [];
+  }
 }
 
 export default async function Home() {
-  const homeSectionData = await extractAllDatas("home");
-  const aboutSectionData = await extractAllDatas("about");
-  const experienceSectionData = await extractAllDatas("experience");
-  const educationSectionData = await extractAllDatas("education");
-  const projectSectionData = await extractAllDatas("project");
+  const sections = ["home", "about", "experience", "education", "project"];
+  const [
+    homeSectionData,
+    aboutSectionData,
+    experienceSectionData,
+    educationSectionData,
+    projectSectionData,
+  ] = await extractAllDatas(sections);
 
   return (
     <div>

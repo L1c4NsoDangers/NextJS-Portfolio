@@ -6,7 +6,10 @@ export const dynamic = "force-dynamic";
 
 export async function GET(req) {
   try {
+    // Menggunakan await untuk memastikan koneksi ke database berhasil
     await connectToDB();
+
+    // Menggunakan `await` saat melakukan pencarian data
     const extractData = await Home.find({});
 
     if (extractData) {
@@ -17,15 +20,14 @@ export async function GET(req) {
     } else {
       return NextResponse.json({
         success: false,
-        message: "Something went wrong !Please try again",
+        message: "Something went wrong! Please try again",
       });
     }
   } catch (e) {
-    console.log(e);
-
+    console.error("Error:", e); // Menggunakan `console.error` untuk kesalahan
     return NextResponse.json({
       success: false,
-      message: "Something went wrong !Please try again",
+      message: "Something went wrong! Please try again",
     });
   }
 }
