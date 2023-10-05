@@ -1,3 +1,4 @@
+"use client";
 // import axios untuk permintaan HTTP
 import axios from "axios";
 
