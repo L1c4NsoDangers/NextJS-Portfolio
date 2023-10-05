@@ -1,3 +1,5 @@
+import React, { useEffect, useState } from "react"; // Tambahkan import useState dan useEffect
+
 import ClientAboutView from "@/components/client-view/about";
 import ClientContactView from "@/components/client-view/contact";
 import ClientExperienceAndEducationView from "@/components/client-view/experience";
@@ -7,7 +9,7 @@ import ClientProjectView from "@/components/client-view/project";
 async function extractAllDatas(sections) {
   try {
     const requests = sections.map((section) =>
-      fetch(`https://nacilprofile.vercel.app/api/${section}/get`, {
+      fetch(`https://nacilprofilexxx.vercel.app/api/${section}/get`, {
         method: "GET",
         cache: "no-store",
       }).then((res) => res.json())
@@ -22,29 +24,34 @@ async function extractAllDatas(sections) {
   }
 }
 
-export default async function Home() {
+export default function Home() {
   const sections = ["home", "about", "experience", "education", "project"];
-  const [
-    homeSectionData,
-    aboutSectionData,
-    experienceSectionData,
-    educationSectionData,
-    projectSectionData,
-  ] = await extractAllDatas(sections);
+  const [sectionData, setSectionData] = useState({}); // Gunakan useState untuk menyimpan data
+
+  useEffect(() => {
+    async function fetchData() {
+      const data = await extractAllDatas(sections);
+      const sectionDataObject = {};
+
+      sections.forEach((section, index) => {
+        sectionDataObject[section] = data[index];
+      });
+
+      setSectionData(sectionDataObject);
+    }
+
+    fetchData();
+  }, []);
 
   return (
     <div>
-      <ClientHomeView data={homeSectionData} />
-      <ClientAboutView
-        data={
-          aboutSectionData && aboutSectionData.length ? aboutSectionData[0] : []
-        }
-      />
+      <ClientHomeView data={sectionData["home"]} />
+      <ClientAboutView data={sectionData["about"]} />
       <ClientExperienceAndEducationView
-        educationData={educationSectionData}
-        experienceData={experienceSectionData}
+        educationData={sectionData["education"]}
+        experienceData={sectionData["experience"]}
       />
-      <ClientProjectView data={projectSectionData} />
+      <ClientProjectView data={sectionData["project"]} />
       <ClientContactView />
     </div>
   );
