@@ -1,13 +1,16 @@
-"use-client"; // Tandai komponen ini sebagai komponen klien
-
 import React, { useEffect, useState } from "react"; // Tambahkan import useState dan useEffect
 
+// ... kode lainnya
+
+// Menandai komponen-komponen yang memerlukan useState dan useEffect sebagai komponen klien
 <use-client />;
 import ClientAboutView from "@/components/client-view/about";
 import ClientContactView from "@/components/client-view/contact";
 import ClientExperienceAndEducationView from "@/components/client-view/experience";
 import ClientHomeView from "@/components/client-view/home";
 import ClientProjectView from "@/components/client-view/project";
+
+// ... kode lainnya
 
 async function extractAllDatas(sections) {
   try {
