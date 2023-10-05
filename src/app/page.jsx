@@ -1,3 +1,5 @@
+"use-client";
+
 import React, { useEffect, useState } from "react"; // Tambahkan import useState dan useEffect
 
 import ClientAboutView from "@/components/client-view/about";
