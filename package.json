@@ -1,0 +1,32 @@
+{
+  "name": "portfolio",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@fullhuman/postcss-purgecss": "^5.0.0",
+    "@mui/lab": "^5.0.0-alpha.146",
+    "@mui/material": "^5.14.11",
+    "bcryptjs": "^2.4.3",
+    "framer-motion": "^10.16.4",
+    "mongoose": "^7.5.3",
+    "next": "latest",
+    "react": "latest",
+    "react-dom": "latest",
+    "react-icons": "^4.11.0",
+    "react-scroll": "^1.8.9",
+    "react-slick": "^0.29.0"
+  },
+  "devDependencies": {
+    "autoprefixer": "latest",
+    "postcss": "latest",
+    "tailwindcss": "latest"
+  }
+}
