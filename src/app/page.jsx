@@ -1,21 +1,13 @@
-import React, { useEffect, useState } from "react"; // Tambahkan import useState dan useEffect
-
-// ... kode lainnya
-
-// Menandai komponen-komponen yang memerlukan useState dan useEffect sebagai komponen klien
-<use-client />;
 import ClientAboutView from "@/components/client-view/about";
 import ClientContactView from "@/components/client-view/contact";
 import ClientExperienceAndEducationView from "@/components/client-view/experience";
 import ClientHomeView from "@/components/client-view/home";
 import ClientProjectView from "@/components/client-view/project";
 
-// ... kode lainnya
-
 async function extractAllDatas(sections) {
   try {
     const requests = sections.map((section) =>
-      fetch(`https://nacilprofilexxx.vercel.app/api/${section}/get`, {
+      fetch(`https://nacilprofilexxx.vercel.app//api/${section}/get`, {
         method: "GET",
         cache: "no-store",
       }).then((res) => res.json())
@@ -30,34 +22,29 @@ async function extractAllDatas(sections) {
   }
 }
 
-export default function Home() {
+export default async function Home() {
   const sections = ["home", "about", "experience", "education", "project"];
-  const [sectionData, setSectionData] = useState({}); // Gunakan useState untuk menyimpan data
-
-  useEffect(() => {
-    async function fetchData() {
-      const data = await extractAllDatas(sections);
-      const sectionDataObject = {};
-
-      sections.forEach((section, index) => {
-        sectionDataObject[section] = data[index];
-      });
-
-      setSectionData(sectionDataObject);
-    }
-
-    fetchData();
-  }, []);
+  const [
+    homeSectionData,
+    aboutSectionData,
+    experienceSectionData,
+    educationSectionData,
+    projectSectionData,
+  ] = await extractAllDatas(sections);
 
   return (
     <div>
-      <ClientHomeView data={sectionData["home"]} />
-      <ClientAboutView data={sectionData["about"]} />
-      <ClientExperienceAndEducationView
-        educationData={sectionData["education"]}
-        experienceData={sectionData["experience"]}
+      <ClientHomeView data={homeSectionData} />
+      <ClientAboutView
+        data={
+          aboutSectionData && aboutSectionData.length ? aboutSectionData[0] : []
+        }
       />
-      <ClientProjectView data={sectionData["project"]} />
+      <ClientExperienceAndEducationView
+        educationData={educationSectionData}
+        experienceData={experienceSectionData}
+      />
+      <ClientProjectView data={projectSectionData} />
       <ClientContactView />
     </div>
   );
