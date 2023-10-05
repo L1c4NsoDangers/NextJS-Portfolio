@@ -7,7 +7,7 @@ import ClientProjectView from "@/components/client-view/project";
 async function extractAllDatas(sections) {
   try {
     const requests = sections.map((section) =>
-      fetch(`https://nacilprofilexxx.vercel.app//api/${section}/get`, {
+      fetch(`https://nacilprofilexxx.vercel.app/api/${section}/get`, {
         method: "GET",
         cache: "no-store",
       }).then((res) => res.json())
@@ -37,7 +37,9 @@ export default async function Home() {
       <ClientHomeView data={homeSectionData} />
       <ClientAboutView
         data={
-          aboutSectionData && aboutSectionData.length ? aboutSectionData[0] : []
+          aboutSectionData && aboutSectionData.length
+            ? aboutSectionData[0]
+            : "Data tidak tersedia"
         }
       />
       <ClientExperienceAndEducationView

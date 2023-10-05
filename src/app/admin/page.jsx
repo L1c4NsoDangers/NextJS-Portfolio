@@ -9,6 +9,15 @@ import Login from "@/components/admin-view/login";
 import AdminProjectView from "@/components/admin-view/project";
 import { addData, getData, login, updateData } from "@/services";
 import { useEffect, useState } from "react";
+import dynamic from "next/dynamic";
+
+const ClientComponent = dynamic(
+  () => import("@/components/client-view/about"),
+  {
+    ssr: false, // Menonaktifkan rendering server-side
+  }
+);
+s;
 
 const initialHomeFormData = {
   heading: "",
