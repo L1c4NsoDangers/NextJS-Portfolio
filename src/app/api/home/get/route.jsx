@@ -20,7 +20,7 @@ export async function GET(req) {
     } else {
       return NextResponse.json({
         success: false,
-        message: "Something went wrong! Please try again",
+        message: "No data found", // Pesan kesalahan yang lebih informatif
       });
     }
   } catch (e) {
