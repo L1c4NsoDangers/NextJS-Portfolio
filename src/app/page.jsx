@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react"; // Tambahkan import useState dan useEffect
 
+<use-client />;
 import ClientAboutView from "@/components/client-view/about";
 import ClientContactView from "@/components/client-view/contact";
 import ClientExperienceAndEducationView from "@/components/client-view/experience";
