@@ -65,22 +65,12 @@ export default function ClientHomeView({ data }) {
             variants={setVariants}
           >
             <div className="flex flex-col justify-center items-start row-start-2 sm:row-start-1">
-              <h1 className="mb-4 text-3xl lg:text-4xl xl:text-6xl font-medium leading-normal">
-                {data && data.length
-                  ? data[0]?.heading
-                      .split(" ")
-                      .map((item, index) => (
-                        <span
-                          className={`${
-                            index === 2 || index === 3
-                              ? "text-orange-600"
-                              : "text-black"
-                          }`}
-                        >
-                          {item}{" "}
-                        </span>
-                      ))
-                  : null}
+              <h1 className="mb-4 text-3xl text-white lg:text-4xl xl:text-6xl font-medium leading-normal">
+                I am An
+                <span className="mb-4 text-3xl text-orange-600 lg:text-4xl xl:text-6xl font-medium leading-normal">
+                  Creative Development
+                </span>
+                Experience
               </h1>
               <p className="text-black mt-4 mb-8 font-bold">
                 {data && data.length ? data[0]?.summary : null}
